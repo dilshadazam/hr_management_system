@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 //importing driver model
 import User from "../models/users.js";
 
-export const isAdministrator = async (req, res, next) => {
+export const isEmployee = async (req, res, next) => {
   const authHeader = req.get("Authorization");
   try {
     if (!authHeader) {
@@ -11,7 +11,7 @@ export const isAdministrator = async (req, res, next) => {
       err.statusCode = 401;
       return next(err);
     }
-    console.log("run isAdmin auth header ");
+    console.log("run isEmployee auth header ");
     const token = authHeader.split(" ")[1]; //Authorization header looks like {Authorization: 'Bearer ' + this.props.token}
     let decodedToken;
     decodedToken = jwt.verify(token, process.env.TOKEN_SIGNING_KEY);
@@ -21,19 +21,19 @@ export const isAdministrator = async (req, res, next) => {
       error.statusCode = 401;
       next(error);
     }
-    const administrator = await User.findOne({
+    const employee = await User.findOne({
       where: {
         email: decodedToken.email,
         isActive: true,
       },
     });
-    if (!administrator) {
-      const error = new Error("Administrator not found");
+    if (!employee) {
+      const error = new Error("Employee not found");
       error.statusCode = 404;
       next(error);
     }
-    if ((!administrator, ["dataValues"]["isVerified"])) {
-      const error = new Error("Not Verified Administrator");
+    if ((!employee, ["dataValues"]["isVerified"])) {
+      const error = new Error("Not Verified Employee");
       error.statusCode = 403;
       return next(error);
     }

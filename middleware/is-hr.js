@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 //importing driver model
 import User from "../models/users.js";
 
-export const isAdministrator = async (req, res, next) => {
+export const isHr = async (req, res, next) => {
   const authHeader = req.get("Authorization");
   try {
     if (!authHeader) {
@@ -11,7 +11,7 @@ export const isAdministrator = async (req, res, next) => {
       err.statusCode = 401;
       return next(err);
     }
-    console.log("run isAdmin auth header ");
+    console.log("run isHr auth header ");
     const token = authHeader.split(" ")[1]; //Authorization header looks like {Authorization: 'Bearer ' + this.props.token}
     let decodedToken;
     decodedToken = jwt.verify(token, process.env.TOKEN_SIGNING_KEY);
@@ -21,19 +21,19 @@ export const isAdministrator = async (req, res, next) => {
       error.statusCode = 401;
       next(error);
     }
-    const administrator = await User.findOne({
+    const hr = await User.findOne({
       where: {
         email: decodedToken.email,
         isActive: true,
       },
     });
-    if (!administrator) {
-      const error = new Error("Administrator not found");
+    if (!hr) {
+      const error = new Error("Hr not found");
       error.statusCode = 404;
       next(error);
     }
-    if ((!administrator, ["dataValues"]["isVerified"])) {
-      const error = new Error("Not Verified Administrator");
+    if ((!hr, ["dataValues"]["isVerified"])) {
+      const error = new Error("Not Verified Hr");
       error.statusCode = 403;
       return next(error);
     }

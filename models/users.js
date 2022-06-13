@@ -37,6 +37,22 @@ const User = sequelize.define("user", {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
+  isEmployee: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  isHod: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  isHr: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  isManager: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
 
   isAuthorized: {
     type: Sequelize.BOOLEAN,
