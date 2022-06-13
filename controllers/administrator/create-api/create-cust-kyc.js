@@ -9,7 +9,7 @@ export const createCustomer = async (req, res, next) => {
   try {
     const preExistingCustomer = await Customer.findOne({
       where: {
-        customerUniqueNo
+        customerUniqueN
       }
     });
     if (preExistingCustomer) {
