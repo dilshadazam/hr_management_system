@@ -7,7 +7,7 @@ export const createCustomer = async (req, res, next) => {
   validationErrorHandler(req, next);
   const {  customerUniqueNo,  company_name, f_name,l_name,email,contact_no,gender, d_o_b,city,student,employee,self_employed,pan_no,adhar_no} = req.body;
   try {
-    const preExistingCustomer = await Customer.findOne({
+    const preExistingCustomer = await Customer.findOne(
       where: {
         customerUniqueNo
       }
