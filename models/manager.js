@@ -1,22 +1,15 @@
 import Sequelize from "sequelize";
 
 import sequelize from "../utilities/database.js";
-import Manager from "../models/manager.js";
-const User = sequelize.define("employee", {
+
+const User = sequelize.define("manager", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
-  managerId: {
-    type: Sequelize.INTEGER,
-    allowNull: false,
-    references: {
-      model: Manager,
-      key: "id",
-    },
-  },
+ 
   name: {
     type: Sequelize.STRING,
     allowNull: false,
